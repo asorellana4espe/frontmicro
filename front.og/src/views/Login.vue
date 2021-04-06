@@ -2,41 +2,62 @@
   <div class="inicio">
     <div id="formulario" class="container">
       <div class="centrado">
-        <a href="#"><img :src="require('../assets/logo.png')" alt="logo" /></a>
+        <a href="#"><img :src="require('../assets/logo.png')" alt="logo"/></a>
       </div>
 
       <form>
         <div class="entrada">
-          <i class="fa fa-user-circle bold"></i>
-          <input
-            id="email"
-            type="email"
-            placeholder="Tu email"
-            name="email"
-            required
-            autocomplete="email"
-            autofocus
-          />
+          <i class="fa fa-user"></i>
+          <input v-model="user" placeholder="Tu usuario" required autofocus />
         </div>
         <div class="entrada">
-          <i class="fa fa-lock bold"></i>
+          <i class="fa fa-lock"></i>
           <input
-            id="password"
+            v-model="password"
             type="password"
             placeholder="Tu contraseña"
-            name="password"
             required
-            autocomplete="current-password"
           />
         </div>
 
         <div class="centrado">
-          <button id="entrar" type="submit" class="btn btn-lg">Entrar</button>
+          <button id="entrar" @click="login()" type="button" class="btn btn-lg">
+            Ingresar
+          </button>
         </div>
       </form>
     </div>
   </div>
 </template>
+<script>
+import Auth from "../Controllers/Auth.js";
+import Globals from "../Controllers/Globals.js";
+
+export default {
+  data() {
+    return {
+      user: "web",
+      password: "webpass",
+    };
+  },
+  methods: {
+    login: async function () {
+      let respond = await Auth.login(this.user, this.password, Globals._URL);
+      console.log(respond);
+      // if(respond.data.status==true){
+      //     const user={
+      //         token:respond.data.auth
+      //     }
+      //     Auth.setUserLogged(user);
+      //     location.reload();
+      // }else{
+      //     let lbl = document.getElementById('msgerror');
+      //     lbl.innerHTML = ""+respond.data.users;
+      // }
+    },
+  },
+};
+</script>
 
 <style scoped>
 /*==========================Div de error============================*/
@@ -65,7 +86,7 @@
 #formulario {
   position: absolute;
   width: 30%;
-  height: 80%;
+  height: auto;
   background-color: #f7fafc;
   border-radius: 7px;
   top: 50%;
@@ -148,8 +169,11 @@
 
 /*==========================Boton ingreso============================*/
 #entrar {
+  font-family: sans-serif;
   width: 40%;
   background-color: #11cdef;
+  padding: 5px 10px;
+  border-radius: 10px;
   font-weight: bolder;
   color: white;
   margin: 35px auto 0px;
@@ -164,16 +188,7 @@
 
 /*==========================Responsive============================*/
 /*Adapta según el alto alto*/
-@media screen and (max-height: 675px) {
-  #formulario {
-    height: 100%;
-    top: 0px;
-    left: 50%;
-    transform: translateX(-50%);
-    -webkit-transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-  }
-}
+
 @media screen and (max-width: 980px) {
   #formulario {
     width: 60%;
