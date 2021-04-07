@@ -2,7 +2,8 @@ import axios from "axios";
 export default {
   login(user, pass, url) {
     return axios.post(
-      url + "/oauth/token?grant_type=password&username=admin&password=admin",
+      url +
+        "/oauth/token?grant_type=password&username=cliente&password=clientpass",
       {},
       {
         auth: {

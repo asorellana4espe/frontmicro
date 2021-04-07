@@ -5,6 +5,7 @@
     <button class="btningresar" @click="login()" name="ingresar" id="ingresar">
       Ingresar
     </button>
+    <strong class="error">{{ msg }}</strong>
   </div>
 </template>
 
@@ -15,24 +16,22 @@ import Globals from "../Controllers/Globals.js";
 export default {
   data() {
     return {
-      user: "",
-      password: "",
+      user: "web",
+      password: "webpass",
+      msg: "",
     };
   },
   methods: {
     login: async function () {
+      console.log(this.user + " " + this.password);
       let respond = await Auth.login(this.user, this.password, Globals._URL);
-      console.log(respond);
-      // if(respond.data.status==true){
-      //     const user={
-      //         token:respond.data.auth
-      //     }
-      //     Auth.setUserLogged(user);
-      //     location.reload();
-      // }else{
-      //     let lbl = document.getElementById('msgerror');
-      //     lbl.innerHTML = ""+respond.data.users;
-      // }
+      let basicauth = respond.data;
+      if (basicauth) {
+        Auth.setUserLogged(basicauth);
+        location.reload();
+      } else {
+        this.msg = "Credenciales incorrectas";
+      }
     },
   },
 };
