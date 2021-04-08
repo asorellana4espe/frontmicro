@@ -7,17 +7,22 @@
     </label>
     <div class="sidebar">
       <header class="cabecera">
-        <img style="width: 100px;" class="logo" :src="require('../assets/logo.png')" alt="logo" />
+        <img
+          style="width: 100px"
+          class="logo"
+          :src="require('../assets/logo.png')"
+          alt="logo"
+        />
       </header>
       <ul class="" id="">
         <li>
-          <router-link to="/cursos" title="cursos">
-            <a href="#">Cursos</a>
+          <router-link to="/personas" title="personas">
+            <a href="#">Personas</a>
           </router-link>
         </li>
         <li>
-          <router-link to="/personas" title="personas">
-            <a href="#">Personas</a>
+          <router-link to="/cursos" title="cursos">
+            <a href="#">Cursos</a>
           </router-link>
         </li>
         <li>
@@ -35,14 +40,12 @@
   </div>
 </template>
 <script>
-
-
 export default {
   data() {
     return {};
   },
   methods: {
-    menu(){
+    menu() {
       var panel = document.getElementById("contenido_body");
       var check = document.getElementById("check");
 
@@ -64,30 +67,16 @@ export default {
           panel.classList.add("activo");
         }
       }
-      
+
       var x = window.matchMedia("(max-width: 680px)");
       myFunction(x);
       x.addListener(myFunction);
-    }
-    // setGlobals() {
-    //   globals._USER = auth.getUserLogged();
-    //   globals._TOKEN = globals._USER.token.access_token;
-    //   globals._REFRESH_TOKEN = globals._USER.token.refresh_token;
-    //   globals._EXPIRES_TIME = globals._USER.token.expires_in;
-    //   globals._HEADERS = {
-    //     Accept: "application/json",
-    //     "Content-Type": "multipart/form-data",
-    //     "Content-Type": "application/json",
-    //     Authorization: "Bearer " + globals._TOKEN,
-    //   };
-    // },
+    },
   },
   mounted() {
     this.menu();
   },
-  created() {
-    // this.setGlobals();
-  },
+  created() {},
 };
 </script>
 <style>
@@ -408,4 +397,3 @@ label #cancel {
   }
 }
 </style>
-

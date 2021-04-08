@@ -2,7 +2,7 @@
   <div class="inicio">
     <div id="formulario" class="container">
       <div class="centrado">
-        <a href="#"><img :src="require('../assets/logo.png')" alt="logo"/></a>
+        <a href="#"><img :src="require('../assets/logo.png')" alt="logo" /></a>
       </div>
 
       <form>
@@ -31,29 +31,21 @@
 </template>
 <script>
 import Auth from "../Controllers/Auth.js";
-import Globals from "../Controllers/Globals.js";
 
 export default {
   data() {
     return {
-      user: "web",
-      password: "webpass",
+      user: "Admin",
+      password: "ContraseñaAdmin2021",
     };
   },
   methods: {
     login: async function () {
-      let respond = await Auth.login(this.user, this.password, Globals._URL);
-      console.log(respond);
-      // if(respond.data.status==true){
-      //     const user={
-      //         token:respond.data.auth
-      //     }
-      //     Auth.setUserLogged(user);
-      //     location.reload();
-      // }else{
-      //     let lbl = document.getElementById('msgerror');
-      //     lbl.innerHTML = ""+respond.data.users;
-      // }
+      Auth.setUserLogged({
+        nombre: "Admin",
+        token: "No hay no valio",
+      });
+      location.reload();
     },
   },
 };

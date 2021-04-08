@@ -2,7 +2,7 @@
   <div>
     <navegacion></navegacion>
     <div class="panel activo" id="contenido_body">
-        <router-view />
+      <router-view />
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@ export default {
 };
 </script>
 <style>
-*{
+* {
   font-family: sans-serif;
 }
 </style>
