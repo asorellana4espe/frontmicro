@@ -21,4 +21,8 @@ export default {
   delete(url, headers, id) {
     return axios.delete(url + "/ApiMatriculas/matriculas/" + id);
   },
+  listaCurso(url, headers, id) {
+    console.log(id);
+    return axios.get(url + "/ApiMatriculas/matriculas/lista/" + id);
+  },
 };

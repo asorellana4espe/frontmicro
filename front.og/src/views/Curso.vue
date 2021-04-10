@@ -85,6 +85,8 @@
             <i class="fa fa-pen edit" @click="loadEdit(curso)"></i>
             <i class="fa fa-trash delete" @click="borrar(curso.cursoId)"></i>
           </div>
+          <strong>Lista matriculados:</strong><br>
+          <p>{{ curso.cursoPersonas }}</p>
         </div>
       </div>
     </div>
@@ -94,6 +96,7 @@
 <script>
 import cursoController from "../Controllers/Curso.js";
 import Globals from "../Controllers/Globals.js";
+import axios from "axios";
 
 export default {
   data() {
@@ -121,7 +124,16 @@ export default {
     list: async function (head) {
       this.loaded = false;
       let response = await cursoController.list(Globals._URL, head);
-      this.listCursos = response.data;
+      let datos = response.data;
+      
+      datos.forEach((element) => {
+        axios.get(Globals._URL + "/ApiMatriculas/matriculas/lista/" + element.cursoId).then(function (response) {
+          // handle success
+          element.cursoPersonas = response.data;
+        });
+      });
+      this.listCursos = datos;
+      console.log(this.listCursos);
       this.loaded = true;
     },
     crear: async function (body, head) {
