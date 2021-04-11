@@ -32,7 +32,6 @@ public class CorsConfig {
 	    configAutenticacao.addAllowedMethod("PUT");
 	    configAutenticacao.addAllowedMethod("OPTIONS");
 	    configAutenticacao.setMaxAge(3600L);
-	    //source.registerCorsConfiguration("/oauth/token", configAutenticacao);
 	    source.registerCorsConfiguration("/**", configAutenticacao); // Global for all paths
 	    
 	    FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));

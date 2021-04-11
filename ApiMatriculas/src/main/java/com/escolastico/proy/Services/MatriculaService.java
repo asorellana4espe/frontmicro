@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -42,6 +42,15 @@ public class MatriculaService {
 		return matriculaRepository.findById(id).get();
 	}
 
+	public List<Persona> findPersonasCurso(Long id){
+		List<Matricula> matri = matriculaRepository.findByCursoId(id);
+		List<Persona> curso = new ArrayList<Persona>();
+		matri.forEach(item ->{
+			curso.add(restTemplate.getForObject("http://localhost:9002/persona/"+ item.getPersonaId(), 
+					Persona.class));
+		});
+		return curso;
+	}
 	
 	public void delete(Long id) {
 		try {

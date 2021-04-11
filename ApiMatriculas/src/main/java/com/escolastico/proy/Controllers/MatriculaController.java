@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.escolastico.proy.entities.Matricula;
 import com.escolastico.proy.Services.MatriculaService;
+import com.escolastico.proy.VO.Persona;
 import com.escolastico.proy.VO.ResponseTemplateVO;
 
 @RestController
@@ -34,6 +35,11 @@ public class MatriculaController {
 	@GetMapping("/")
 	public List<ResponseTemplateVO> list() {
 		return matriculaService.findAll();
+	}
+	
+	@GetMapping("/lista/{id}")
+	public List<Persona> matriculados(@PathVariable Long id) {
+		return matriculaService.findPersonasCurso(id);
 	}
 	
 	@PostMapping("/")
